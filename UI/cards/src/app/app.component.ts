@@ -35,20 +35,46 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    this.cardService.addCard(this.card).subscribe(
-      response => {
-        this.getAllCards();
-        //clear form
-        this.card = {
-          id: '',
-          cardNumber: '',
-          cardHolderName: '',
-          expiryMonth: '',
-          expiryYear: '',
-          cvc: ''
-        };
-      }
-    );
+
+    if (this.card.id == '') {
+      this.cardService.addCard(this.card).subscribe(
+        response => {
+          this.getAllCards();
+          //clear form
+          this.card = {
+            id: '',
+            cardNumber: '',
+            cardHolderName: '',
+            expiryMonth: '',
+            expiryYear: '',
+            cvc: ''
+          };
+        }
+      );
+    }
+    this.updateCard(this.card);
+  }
+
+  deleteCard(id: string) {
+    this.cardService.deleteCard(id)
+      .subscribe(
+        response => {
+          this.getAllCards();
+        }
+      );
+  }
+
+  populateForm(card: Card): void {
+    this.card = card;
+  }
+
+  updateCard(card: Card): void {
+    this.cardService.updateCard(card)
+      .subscribe(
+        response => {
+          this.getAllCards();
+        }
+      );
   }
 
 }
