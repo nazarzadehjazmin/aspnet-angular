@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CardsService {
 
-  baseUrl: string = 'http://localhost:4200/api/cards'
+  baseUrl: string = 'https://localhost:7052/api/Cards'
 
   constructor(private http : HttpClient) { }
 
